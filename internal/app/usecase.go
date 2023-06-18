@@ -2,7 +2,10 @@ package app
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"strconv"
+	"time"
 
 	"github.com/google/uuid"
 
@@ -116,11 +119,22 @@ func (u *ShippingUseCase) makeReturn(ctx context.Context, filename string, shipp
 
 // shippingHeaderToReturnHeader is a function that converts a ShippingHeader to a ReturnHeader
 func (u *ShippingUseCase) shippingHeaderToReturnHeader(ctx context.Context, sh domain.ShippingHeader) (domain.ReturnHeader, error) {
+	const (
+		YYYYMMDD = "20060102"
+	)
+
+	now := time.Now()
+	date := now.Format(YYYYMMDD)
+	dateInt, err := strconv.Atoi(date)
+	if err != nil {
+		fmt.Println("Error during conversion")
+	}
+
 	returnHeader := domain.ReturnHeader{
 		TipoRegistro:             0,
 		CodigoRetorno:            2,
 		LiteralRetorno:           "RETORNO",
-		CodigoServico:            02,
+		CodigoServico:            2,
 		LiteralServico:           "PIX",
 		ISPB:                     sh.ISPB,
 		TipoPessoaRecebedor:      sh.TipoPessoa,
@@ -129,7 +143,7 @@ func (u *ShippingUseCase) shippingHeaderToReturnHeader(ctx context.Context, sh d
 		ContaRecebedor:           sh.Conta,
 		TipoContaRecebedor:       sh.TipoConta,
 		ChavePix:                 sh.ChavePix,
-		DataGeracao:              sh.DataGeracao, // TODO: time.NOW() format AAAAMMDD
+		DataGeracao:              dateInt,
 		CodigoConvenio:           sh.CodigoConvenio,
 		ExclusivoPSP:             sh.ExclusivoPSP,
 		NomeRecebedor:            sh.NomeRecebedor,
