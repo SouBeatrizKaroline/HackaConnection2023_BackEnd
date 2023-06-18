@@ -246,30 +246,35 @@ func main() {
 		NumeroSequencialRegistro: 1,
 	}
 
-	shippingDetail := []ShippingDetail{
-		{
-			TipoRegistro:          1,
-			Identificador:         "ABC123XYZ456",
-			TipoPessoaRecebedor:   2,
-			CNPJRecebedor:         79772365000194,
-			AgenciaRecebedor:      123,
-			ContaRecebedor:        1234567890,
-			TipoContaRecebedor:    "CC",
-			ChavePix:              "79772365000194",
-			TipoCobranca:          "4",
-			CodOcorrencia:         5,
-			TimestampExpiracao:    20230617164755,
-			DataVencimento:        0,
-			ValidadeAposVenc:      0,
-			ValorOriginal:         0,
-			TipoPessoaDevedor:     2,
-			CNPJDevedor:           96833332000126,
-			NomeDevedor:           "MARIA SANTOS",
-			SolicitacaoPagador:    "PAGAR",
-			ExclusivoPSPRecebedor: "",
-			Brancos:               "",
-			NumeroSequencial:      1,
-		},
+	var shippingDetails []ShippingDetail
+
+	shippingDetail := ShippingDetail{
+
+		TipoRegistro:          1,
+		Identificador:         "ABC123XYZ456",
+		TipoPessoaRecebedor:   2,
+		CNPJRecebedor:         79772365000194,
+		AgenciaRecebedor:      123,
+		ContaRecebedor:        1234567890,
+		TipoContaRecebedor:    "CC",
+		ChavePix:              "79772365000194",
+		TipoCobranca:          "4",
+		CodOcorrencia:         5,
+		TimestampExpiracao:    20230617164755,
+		DataVencimento:        0,
+		ValidadeAposVenc:      0,
+		ValorOriginal:         0,
+		TipoPessoaDevedor:     2,
+		CNPJDevedor:           96833332000126,
+		NomeDevedor:           "MARIA SANTOS",
+		SolicitacaoPagador:    "PAGAR",
+		ExclusivoPSPRecebedor: "",
+		Brancos:               "",
+		NumeroSequencial:      1,
+	}
+
+	for i := 0; i < 100*1000; i++ {
+		shippingDetails = append(shippingDetails, shippingDetail)
 	}
 
 	shippingDetailAdditional := []ShippingDetailAdditional{
@@ -320,13 +325,13 @@ func main() {
 		NumeroSequencial: 1,
 	}
 
-	data, err := gocnab.Marshal750(shippingHeader, shippingDetail, shippingDetailAdditional, shippingDetailCharge, shippingTrailer)
+	data, err := gocnab.Marshal750(shippingHeader, shippingDetails, shippingDetailAdditional, shippingDetailCharge, shippingTrailer)
 	if err != nil {
 		fmt.Println("err", err)
 		return
 	}
 
-	filePath := "./file.txt"
+	filePath := "./REMESSA_CNAB_750.txt"
 
 	// Call the function to write the data to the file
 	err = writeFile(data, filePath)
@@ -353,15 +358,15 @@ func main() {
 	}
 
 	fmt.Println("h1 == h2", shippingHeader == shippingHeader2)
-	for i := range shippingDetail {
-		fmt.Println("shippingDetail[i] == shippingDetail2[i]", shippingDetail[i] == shippingDetail2[i])
-	}
-	for i := range shippingDetailAdditional {
-		fmt.Println("shippingDetailAdditional[i] == shippingDetailAdditional2[i]", shippingDetailAdditional[i] == shippingDetailAdditional2[i])
-	}
-	for i := range shippingDetailCharge {
-		fmt.Println("shippingDetailCharge[i] == shippingDetailCharge2[i]", shippingDetailCharge[i] == shippingDetailCharge2[i])
-	}
+	// for i := range shippingDetails {
+	// 	fmt.Println("shippingDetail[i] == shippingDetail2[i]", shippingDetails[i] == shippingDetail2[i])
+	// }
+	// for i := range shippingDetailAdditional {
+	// 	fmt.Println("shippingDetailAdditional[i] == shippingDetailAdditional2[i]", shippingDetailAdditional[i] == shippingDetailAdditional2[i])
+	// }
+	// for i := range shippingDetailCharge {
+	// 	fmt.Println("shippingDetailCharge[i] == shippingDetailCharge2[i]", shippingDetailCharge[i] == shippingDetailCharge2[i])
+	// }
 	fmt.Println("shippingTrailer == shippingTrailer2", shippingTrailer == shippingTrailer2)
 
 }

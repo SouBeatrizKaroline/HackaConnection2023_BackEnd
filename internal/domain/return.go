@@ -64,74 +64,74 @@ type ReturnDetail struct {
 }
 
 type ReturnDetailAdditional struct {
-	TipoRegistro     int    `cnab:"1,1"`
-	Identificador    string `cnab:"2,36"`
-	Nome             string `cnab:"37,86"`
-	Valor            string `cnab:"87,286"`
-	NomeOpcional     string `cnab:"287,336"`
-	ValorOpcional    string `cnab:"337,536"`
-	Brancos          string `cnab:"537,744"`
-	NumeroSequencial int    `cnab:"745,750"`
+	TipoRegistro     int    `cnab:"0,1"`
+	Identificador    string `cnab:"1,36"`
+	Nome             string `cnab:"36,86"`
+	Valor            string `cnab:"86,286"`
+	NomeOpcional     string `cnab:"286,336"`
+	ValorOpcional    string `cnab:"336,536"`
+	Brancos          string `cnab:"536,744"`
+	NumeroSequencial int    `cnab:"744,750"`
 }
 
 type ReturnDetailTransactionGeneration struct {
-	TipoRegistro     int    `cnab:"1,1"`
-	Identificador    string `cnab:"2,36"`
-	ChavePix         string `cnab:"37,113"`
-	CodigoMovimento  int    `cnab:"114,115"`
-	DataMovimento    int    `cnab:"116,123"`
-	EMVQrCode        string `cnab:"124,623"`
-	LocationLink     string `cnab:"624,700"`
-	Brancos          string `cnab:"701,744"`
-	NumeroSequencial int    `cnab:"745,750"`
+	TipoRegistro     int    `cnab:"0,1"`
+	Identificador    string `cnab:"1,36"`
+	ChavePix         string `cnab:"36,113"`
+	CodigoMovimento  int    `cnab:"113,115"`
+	DataMovimento    int    `cnab:"115,123"`
+	EMVQrCode        string `cnab:"123,623"`
+	LocationLink     string `cnab:"623,700"`
+	Brancos          string `cnab:"700,744"`
+	NumeroSequencial int    `cnab:"744,750"`
 }
 
 type ReturnDetailReceivement struct {
-	TipoRegistro          int     `cnab:"1,1"`     // 9(01)
-	Identificador         string  `cnab:"2,36"`    // X(35)
-	ISPB                  string  `cnab:"37,44"`   // X(08)
-	TipoPessoaRecebedor   int     `cnab:"45,46"`   // 9(02)
-	CPFCNPJRecebedor      int     `cnab:"47,60"`   // 9(14)
-	AgenciaRecebedor      int     `cnab:"61,64"`   // 9(04)
-	ContaRecebedor        int     `cnab:"65,84"`   // 9(20)
-	TipoContaRecebedor    string  `cnab:"85,88"`   // X(04)
-	ChavePix              string  `cnab:"89,165"`  // X(77)
-	TipoCobranca          string  `cnab:"166,166"` // X(01)
-	CodigoMovimento       int     `cnab:"167,168"` // 9(02)
-	DataMovimento         int     `cnab:"169,176"` // 9(08)
-	DataVencimento        int     `cnab:"177,184"` // 9(08)
-	TimestampPagamento    int     `cnab:"185,198"` // 9(14)
+	TipoRegistro          int     `cnab:"0,1"`     // 9(01)
+	Identificador         string  `cnab:"1,36"`    // X(35)
+	ISPB                  string  `cnab:"36,44"`   // X(08)
+	TipoPessoaRecebedor   int     `cnab:"44,46"`   // 9(02)
+	CPFCNPJRecebedor      int     `cnab:"46,60"`   // 9(14)
+	AgenciaRecebedor      int     `cnab:"60,64"`   // 9(04)
+	ContaRecebedor        int     `cnab:"64,84"`   // 9(20)
+	TipoContaRecebedor    string  `cnab:"84,88"`   // X(04)
+	ChavePix              string  `cnab:"88,165"`  // X(77)
+	TipoCobranca          string  `cnab:"165,166"` // X(01)
+	CodigoMovimento       int     `cnab:"166,168"` // 9(02)
+	DataMovimento         int     `cnab:"168,176"` // 9(08)
+	DataVencimento        int     `cnab:"176,184"` // 9(08)
+	TimestampPagamento    int     `cnab:"184,198"` // 9(14)
 	ValorOriginal         float64 `cnab:"199,215"` // 9(15)V9(2)
-	ValorJuros            float64 `cnab:"216,232"` // 9(15)V9(2)
-	ValorMulta            float64 `cnab:"233,249"` // 9(15)V9(2)
-	ValorAbatimento       float64 `cnab:"250,266"` // 9(15)V9(2)
-	ValorDesconto         float64 `cnab:"267,283"` // 9(15)V9(2)
-	ValorFinal            float64 `cnab:"284,300"` // 9(15)V9(2)
-	ValorPago             float64 `cnab:"301,317"` // 9(15)V9(2)
-	TipoPessoaDevedor     int     `cnab:"318,319"` // 9(02)
-	CPFCNPJDevedor        int     `cnab:"320,333"` // 9(14)
-	TipoPessoaPagador     int     `cnab:"334,335"` // 9(02)
-	CPFCNPJPagador        int     `cnab:"336,349"` // 9(14)
-	NomePagador           string  `cnab:"350,489"` // X(140)
-	MensagemPagador       string  `cnab:"490,629"` // X(140)
-	CodigoLiquidacao      string  `cnab:"630,631"` // X(02)
-	EndToEndID            string  `cnab:"632,663"` // X(32)
-	Revisao               int     `cnab:"664,667"` // 9(4)
-	ExclusivoPSPRecebedor string  `cnab:"668,727"` // X(60)
-	TarifaCobranca        float64 `cnab:"728,744"` // 9(15)V9(2)
-	NumeroSequencial      int     `cnab:"745,750"` // 9(06)
+	ValorJuros            float64 `cnab:"215,232"` // 9(15)V9(2)
+	ValorMulta            float64 `cnab:"232,249"` // 9(15)V9(2)
+	ValorAbatimento       float64 `cnab:"249,266"` // 9(15)V9(2)
+	ValorDesconto         float64 `cnab:"266,283"` // 9(15)V9(2)
+	ValorFinal            float64 `cnab:"283,300"` // 9(15)V9(2)
+	ValorPago             float64 `cnab:"300,317"` // 9(15)V9(2)
+	TipoPessoaDevedor     int     `cnab:"317,319"` // 9(02)
+	CPFCNPJDevedor        int     `cnab:"319,333"` // 9(14)
+	TipoPessoaPagador     int     `cnab:"333,335"` // 9(02)
+	CPFCNPJPagador        int     `cnab:"335,349"` // 9(14)
+	NomePagador           string  `cnab:"349,489"` // X(140)
+	MensagemPagador       string  `cnab:"489,629"` // X(140)
+	CodigoLiquidacao      string  `cnab:"629,631"` // X(02)
+	EndToEndID            string  `cnab:"631,663"` // X(32)
+	Revisao               int     `cnab:"663,667"` // 9(4)
+	ExclusivoPSPRecebedor string  `cnab:"667,727"` // X(60)
+	TarifaCobranca        float64 `cnab:"727,744"` // 9(15)V9(2)
+	NumeroSequencial      int     `cnab:"744,750"` // 9(06)
 }
 
 type ReturnTrailer struct {
 	TipoRegistro     int     `cnab:"0,1"`     // 9(01)
-	CodigoRetorno    int     `cnab:"2,2"`     // 9(01)
-	CodigoServico    int     `cnab:"3,4"`     // 9(02)
-	ISPB             string  `cnab:"5,12"`    // X(08)
-	CodigosErro      string  `cnab:"13,42"`   // X(30)
-	Brancos          string  `cnab:"43,712"`  // X(670)
-	ValorTotal       float64 `cnab:"713,729"` // 9(15)V9(2)
-	QtdeDetalhes     int     `cnab:"730,744"` // 9(15)
-	NumeroSequencial int     `cnab:"745,750"` // 9(06)
+	CodigoRetorno    int     `cnab:"1,2"`     // 9(01)
+	CodigoServico    int     `cnab:"2,4"`     // 9(02)
+	ISPB             string  `cnab:"4,12"`    // X(08)
+	CodigosErro      string  `cnab:"12,42"`   // X(30)
+	Brancos          string  `cnab:"42,712"`  // X(670)
+	ValorTotal       float64 `cnab:"712,729"` // 9(15)V9(2)
+	QtdeDetalhes     int     `cnab:"729,744"` // 9(15)
+	NumeroSequencial int     `cnab:"744,750"` // 9(06)
 }
 
 func (r *Return) ToFile() ([]byte, error) {
