@@ -42,10 +42,10 @@ func main() {
 	r := infra.NewRouter(chiRouter, shippingHandler)
 
 	// Run server
-	go runApiHTTP(r)
+	go runApiHTTP(r) // Run server in a goroutine
 
 	// Run worker
-	go runWorker(shippingWorker)
+	go runWorker(shippingWorker) // Run worker in an another goroutine
 
 	// Keep the main goroutine running
 	select {}
@@ -55,9 +55,8 @@ func main() {
 func runApiHTTP(handler http.Handler) {
 
 	port := os.Getenv("PORT")
-	// port := "8001"
 	log.Println("Server running on port", port)
-	// http.ListenAndServe(":"+port, handler)
+	http.ListenAndServe(":"+port, handler)
 }
 
 func runWorker(shippingWorker *infra.ShippingWorker) {
