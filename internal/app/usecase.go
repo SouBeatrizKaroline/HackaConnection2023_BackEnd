@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"log"
 
 	"github.com/google/uuid"
 
@@ -39,10 +40,12 @@ func (u *ShippingUseCase) MainFlow(ctx context.Context, filename string, shippin
 		return err
 	}
 
-	err = u.makeReturn(ctx, filename, *shipping)
+	r, err := u.makeReturn(ctx, filename, *shipping)
 	if err != nil {
 		return err
 	}
+
+	log.Println(r)
 
 	return nil
 }
@@ -65,6 +68,7 @@ func (u *ShippingUseCase) makeReturn(ctx context.Context, filename string, shipp
 		if err != nil {
 			return nil, err
 		}
+
 	}
 
 	returnTrailer := u.shippingTrailerToReturnTrailer(shipping)
