@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/go-chi/chi"
@@ -14,7 +15,13 @@ import (
 func main() {
 	chiRouter := chi.NewRouter()
 
-	fileDir := "/Users/jc/Projects/github.com/julioc98/citi/files/"
+	fileDir, err := os.Getwd()
+	if err != nil {
+		log.Println("Error getting current working directory:", err)
+		return
+	}
+
+	fileDir = filepath.Join(fileDir, "files")
 
 	// Repository and Gateway
 	shippingRepo := infra.NewShippingRepository()
