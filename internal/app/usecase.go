@@ -17,18 +17,24 @@ type BacenGateway interface {
 	CobPUT(ctx context.Context, txID string, shippingDetail domain.ShippingDetail) error
 }
 
+type ReturnStorage interface {
+	Save(ctx context.Context, filename string, r domain.Return) error
+}
+
 // ShippingUseCase is a struct that represents a use case for CNAB file (pt-BR Remessa)
 type ShippingUseCase struct {
 	// ShippingRepository domain.ShippingRepository
-	repo  ShippingRepository
-	bacen BacenGateway
+	repo    ShippingRepository
+	bacen   BacenGateway
+	storage ReturnStorage
 }
 
 // NewShippingUseCase returns a new ShippingUseCase
-func NewShippingUseCase(repo ShippingRepository, bacen BacenGateway) *ShippingUseCase {
+func NewShippingUseCase(repo ShippingRepository, bacen BacenGateway, storage ReturnStorage) *ShippingUseCase {
 	return &ShippingUseCase{
-		repo:  repo,
-		bacen: bacen,
+		repo:    repo,
+		bacen:   bacen,
+		storage: storage,
 	}
 }
 
@@ -58,7 +64,7 @@ func (u *ShippingUseCase) makeReturn(ctx context.Context, filename string, shipp
 
 	var details []domain.ReturnDetail
 
-	for _, detail := range shipping.Detail {
+	for i, detail := range shipping.Detail {
 		tmpID := uuid.New().String()
 		if detail.Identificador != "" {
 			tmpID = detail.Identificador
@@ -69,10 +75,36 @@ func (u *ShippingUseCase) makeReturn(ctx context.Context, filename string, shipp
 			return nil, err
 		}
 
+		returnDetail := domain.ReturnDetail{
+			TipoRegistro:           1,
+			Identificador:          tmpID,
+			TipoPessoaRecebedor:    detail.TipoPessoaRecebedor,
+			CNPJRecebedor:          detail.CNPJRecebedor,
+			AgenciaRecebedor:       detail.AgenciaRecebedor,
+			ContaRecebedor:         detail.ContaRecebedor,
+			Tipo:                   "",
+			ChavePix:               detail.ChavePix,
+			TipoCobranca:           detail.TipoCobranca,
+			CodigoMovimento:        1,
+			TimestampExpiracao:     detail.TimestampExpiracao,
+			DataVencimento:         detail.DataVencimento,
+			ValidadeAposVencimento: 0,
+			ValorOriginal:          detail.ValorOriginal,
+			TipoPessoaDevedor:      detail.TipoPessoaDevedor,
+			CNPJDevedor:            detail.CNPJDevedor,
+			NomeDevedor:            detail.NomeDevedor,
+			SolicitacaoPagador:     detail.SolicitacaoPagador,
+			ExclusivoPSPRecebedor:  detail.ExclusivoPSPRecebedor,
+			DataMovimento:          0,
+			CodigosErro:            "",
+			Revisao:                2,
+			NumeroSequencial:       i + 1,
+		}
+
+		details = append(details, returnDetail)
+
 	}
-
 	returnTrailer := u.shippingTrailerToReturnTrailer(shipping)
-
 	r := &domain.Return{
 		Header:  returnHeader,
 		Detail:  details,
