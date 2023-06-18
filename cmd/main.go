@@ -18,8 +18,11 @@ func main() {
 	shippingRepo := infra.NewShippingRepository()
 	bacenGateway := infra.NewBacenGateway()
 
+	// Storage
+	returnStorage := infra.NewReturnStorage()
+
 	// UseCase
-	shippingUC := app.NewShippingUseCase(shippingRepo, bacenGateway)
+	shippingUC := app.NewShippingUseCase(shippingRepo, bacenGateway, returnStorage)
 
 	fileDir := "/Users/jc/Projects/github.com/julioc98/citi/files/"
 
