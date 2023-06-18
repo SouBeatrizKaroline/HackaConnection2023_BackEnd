@@ -85,9 +85,12 @@ func (h *ShippingHandler) HistoryHandler() http.HandlerFunc {
 
 		history := domain.History{
 			Shippings: []domain.ShippingHistory{
-				{ID: "1", FileName: "file1.txt", Status: domain.StatusSuccess, Returnpath: "returnpath1", CreatedAt: &date, UpdatedAt: nil},
-				{ID: "2", FileName: "file2.txt", Status: domain.StatusProcessing, Returnpath: "", CreatedAt: &date, UpdatedAt: nil},
-				{ID: "3", FileName: "file3.txt", Status: domain.StatusError, Returnpath: "", CreatedAt: &date, UpdatedAt: nil},
+				{ID: "1", FileName: "CNAB750_20230617.txt", Status: domain.StatusSuccess, Returnpath: "returnpath1", CreatedAt: &date, UpdatedAt: nil},
+				{ID: "2", FileName: "CNAB750_20230618.txt", Status: domain.StatusProcessing, Returnpath: "", CreatedAt: &date, UpdatedAt: nil},
+				{ID: "3", FileName: "CNAB750_20230616.txt", Status: domain.StatusError, Returnpath: "", CreatedAt: &date, UpdatedAt: nil},
+				{ID: "4", FileName: "CNAB750_20230615.txt", Status: domain.StatusSuccess, Returnpath: "returnpath4", CreatedAt: &date, UpdatedAt: nil},
+				{ID: "5", FileName: "CNAB750_20230614.txt", Status: domain.StatusProcessing, Returnpath: "", CreatedAt: &date, UpdatedAt: nil},
+				{ID: "6", FileName: "CNAB750_20230613.txt", Status: domain.StatusError, Returnpath: "", CreatedAt: &date, UpdatedAt: nil},
 			},
 		}
 
