@@ -15,6 +15,7 @@ type Shipping struct {
 	Additional []ShippingDetailAdditional
 	Charge     []ShippingDetailCharge
 }
+
 type ShippingHeader struct {
 	TipoRegistro             int    `cnab:"0,1"`
 	Operacao                 int    `cnab:"1,2"`

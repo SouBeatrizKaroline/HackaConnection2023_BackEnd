@@ -2,7 +2,6 @@ package app
 
 import (
 	"context"
-	"log"
 
 	"github.com/google/uuid"
 
@@ -51,7 +50,10 @@ func (u *ShippingUseCase) MainFlow(ctx context.Context, filename string, shippin
 		return err
 	}
 
-	log.Println(r)
+	err = u.storage.Save(ctx, filename, *r)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

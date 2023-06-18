@@ -14,17 +14,17 @@ import (
 func main() {
 	chiRouter := chi.NewRouter()
 
+	fileDir := "/Users/jc/Projects/github.com/julioc98/citi/files/"
+
 	// Repository and Gateway
 	shippingRepo := infra.NewShippingRepository()
 	bacenGateway := infra.NewBacenGateway()
 
 	// Storage
-	returnStorage := infra.NewReturnStorage()
+	returnStorage := infra.NewReturnStorage(fileDir)
 
 	// UseCase
 	shippingUC := app.NewShippingUseCase(shippingRepo, bacenGateway, returnStorage)
-
-	fileDir := "/Users/jc/Projects/github.com/julioc98/citi/files/"
 
 	// Worker
 	shippingWorker := infra.NewShippingWorker(shippingUC, fileDir)
