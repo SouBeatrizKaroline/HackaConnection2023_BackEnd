@@ -123,7 +123,7 @@ type ReturnDetailReceivement struct {
 }
 
 type ReturnTrailer struct {
-	TipoRegistro     int     `cnab:"1,1"`     // 9(01)
+	TipoRegistro     int     `cnab:"0,1"`     // 9(01)
 	CodigoRetorno    int     `cnab:"2,2"`     // 9(01)
 	CodigoServico    int     `cnab:"3,4"`     // 9(02)
 	ISPB             string  `cnab:"5,12"`    // X(08)
@@ -135,5 +135,5 @@ type ReturnTrailer struct {
 }
 
 func (r *Return) ToFile() ([]byte, error) {
-	return gocnab.Marshal750(r)
+	return gocnab.Marshal750(r.Header, r.Detail, r.DetailAdditional, r.DetailGeneration, r.Trailer)
 }

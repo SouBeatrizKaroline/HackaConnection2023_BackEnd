@@ -109,7 +109,9 @@ func (u *ShippingUseCase) makeReturn(ctx context.Context, filename string, shipp
 		details = append(details, returnDetail)
 
 	}
+
 	returnTrailer := u.shippingTrailerToReturnTrailer(shipping)
+
 	r := &domain.Return{
 		Header:  returnHeader,
 		Detail:  details,

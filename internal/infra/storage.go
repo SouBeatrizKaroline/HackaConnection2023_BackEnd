@@ -25,7 +25,7 @@ func (r *Storage) Save(ctx context.Context, filename string, ret domain.Return) 
 		return err
 	}
 
-	newFile, err := os.Create(filepath.Join(r.sourceFolder, "return", filename))
+	newFile, err := os.Create(filepath.Join(r.sourceFolder, "return", "RETURN_"+filename))
 	if err != nil {
 		return err
 	}
